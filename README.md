@@ -19,17 +19,24 @@ java -jar target/poc-springboot-1.0-SNAPSHOT.jar
 
 ## Rest API examples
 GET
+```
 curl http://localhost:8080/persons/{ID}
+```
 
 POST
+```
 curl -i -X POST -H "Content-Type:application/json" -d '{  "firstName" : "Marty",  "lastName" : "McFly" }' http://localhost:8080/persons
+```
 
 PUT
+```
 curl -X PUT -H "Content-Type:application/json" -d '{ "firstName": "Emmett", "lastName": "Brown" }' http://localhost:8080/persons/{ID}
+```
 
 DELETE
+```
 curl -X DELETE http://localhost:8080/persons/{ID}
-
+```
 
 > NOTE: Spring Data REST uses the [HAL format](http://stateless.co/hal_specification.html) for JSON output. It is flexible and offers a convenient way to supply links adjacent to the data that is served.
 
