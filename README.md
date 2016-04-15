@@ -1,5 +1,5 @@
 # poc-springboot
-POC using SpringBoot: Spring application that allows you to create and retrieve Person objects stored in a MongoDB NoSQL database using Spring Data REST.
+POC Rest API using SpringBoot that allows you to create, update and retrieve Person objects stored in a MongoDB NoSQL database using Spring Data REST.
 
 ## Configuration
 Default MongoDB config in application.properties file:
@@ -20,6 +20,7 @@ java -jar target/poc-springboot-1.0-SNAPSHOT.jar
 ## Rest API examples
 GET
 ```
+curl http://localhost:8080/persons
 curl http://localhost:8080/persons/{ID}
 ```
 
