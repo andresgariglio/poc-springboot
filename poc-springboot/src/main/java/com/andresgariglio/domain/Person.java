@@ -1,12 +1,18 @@
 package com.andresgariglio.domain;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 
 public class Person {
 
-	@Id private String id;
+	@Id
+	private String id;
 
+	@NotNull(message = "First name is required")
 	private String firstName;
+
+	@NotNull(message = "Last name is required")
 	private String lastName;
 
 	public String getFirstName() {
