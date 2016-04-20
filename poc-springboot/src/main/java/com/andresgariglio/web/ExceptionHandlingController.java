@@ -1,17 +1,30 @@
 package com.andresgariglio.web;
 
-import org.springframework.http.HttpStatus;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
 public class ExceptionHandlingController {
 
-	// Convert a predefined exception to an HTTP Status code
-	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Data integrity violation")
-	@ExceptionHandler(javax.validation.ConstraintViolationException.class)
-	public void error() {
-		// Nothing to do
+	@ExceptionHandler(ConstraintViolationException.class)
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> handleConstraintViolationException(ConstraintViolationException e) {
+		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+		Map<String, String> messages = new HashMap<String, String>();
+		for (ConstraintViolation<?> violation : violations) {
+			messages.put(violation.getPropertyPath().toString(), violation.getMessage());
+		}
+
+		return ResponseEntity.badRequest().body(messages);
 	}
+
 }
